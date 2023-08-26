@@ -5,7 +5,8 @@ import { createPost } from "../models/postsModel.js";
 import { getAllTopics, getTopicById } from "../models/topicsModel.js";
 import { getUserById } from "../models/usersModel.js";
 
-// AIzaSyClgmJIvGyrHdxk9r3pXZTx6BVAGl0Rnpw
+dotenv.config();
+
 
 // create a fact
 export const _getInterestingFact = (req, res) => {
@@ -57,8 +58,8 @@ export async function _getTop3Links(req, res) {
 
 
 async function googleSearchRequest(query) {
-    const apiKey = 'AIzaSyClgmJIvGyrHdxk9r3pXZTx6BVAGl0Rnpw'; // Replace with your Google Cloud API key
-    const cx = 'a2bf4ea05b5314aaf'; // Replace with your Custom Search Engine ID
+    const apiKey = process.env.GOOGLE_CLOUD_API_KEY; // Replace with your Google Cloud API key
+    const cx = process.env.CUSTOM_SEARCH_ENGINE_ID; // Replace with your Custom Search Engine ID
     const url = `https://www.googleapis.com/customsearch/v1?q=${query}&key=${apiKey}&cx=${cx}&num=3`;
     console.log('url in googleSearchRequest', url);
     const response = await fetch(url);
@@ -72,7 +73,7 @@ async function googleSearchRequest(query) {
 
 async function baseGptRequest(prompt) {
     const api_url = 'https://api.openai.com/v1/chat/completions';
-    const api_key = "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";
+    const api_key = process.env.OPENAI_API_KEY;
     
 
     const headers = {
