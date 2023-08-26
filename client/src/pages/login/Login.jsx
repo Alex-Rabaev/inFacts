@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import './login.css';
+import axios from 'axios';
 
 export default function Login() {
   const [message, setMessage] = useState('');
@@ -14,17 +15,11 @@ export default function Login() {
     const submitHandler = async (event) => {
         event.preventDefault();
         try {
-            const res = await fetch('/api/users/login', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
+            const res = await axios.post('/api/users/login', {
                     username_or_email: usernameOrEmailRef.current.value,
                     password: passwordRef.current.value
                 })
-            })
-            const data = await res.json();
+            const data = res.data;
             if (res.status === 200) {
                 setIsFetching(!isFetching);
                 const decode = jwt_decode(data.token);
