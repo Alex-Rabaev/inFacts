@@ -14,7 +14,6 @@ export default function Login() {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        try {
             const res = await axios.post('/api/users/login', {
                     username_or_email: usernameOrEmailRef.current.value,
                     password: passwordRef.current.value
@@ -34,10 +33,6 @@ export default function Login() {
             } else {
                 setMessage(data.msg);
             }
-            
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     const handleRegisterButton = async () => {
