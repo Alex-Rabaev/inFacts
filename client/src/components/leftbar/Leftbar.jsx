@@ -23,7 +23,7 @@ export default function Leftbar({user}) {
 const generateFactClickHandler = async () => {
   setIsFetching(!isFetching);
   try {
-    await axios.post("http://localhost:3030/api/facts/new_fact_post", {user_id: user?.user_id});
+    await axios.post("/api/facts/new_fact_post", {user_id: user?.user_id});
     window.location.reload();
   } catch (error) {
     console.error(error);
@@ -34,8 +34,8 @@ useEffect(() => {
     const getAllFriends = async () => {
       if (!currentUserId) return;
       try {
-        const friendsList = await axios.get(`http://localhost:3030/api/users/follows/${user?.user_id}`);
-        const followingsList = await axios.get(`http://localhost:3030/api/users/followings/${user?.user_id}`);
+        const friendsList = await axios.get(`/api/users/follows/${user?.user_id}`);
+        const followingsList = await axios.get(`/api/users/followings/${user?.user_id}`);
         setFriends(friendsList.data)
         setFollowings(followingsList.data)
       } catch (error) {

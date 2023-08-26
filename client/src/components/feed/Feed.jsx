@@ -22,7 +22,7 @@ export default function Feed(props) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`http://localhost:3030/api/posts/followers/${user_id}`)
+        const res = await fetch(`/api/posts/followers/${user_id}`)
         const data = await res.json();
         if (res.status === 200) {
           setPosts(data.sort((p1, p2) => {

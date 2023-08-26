@@ -25,7 +25,7 @@ export default function Share(props) {
     useEffect(() => {
         const getAllTopics = async () => {
             try {
-                const res = await axios.get("http://localhost:3030/api/topics/all");
+                const res = await axios.get("/api/topics/all");
                 const topics = res.data.sort((a, b) => a.topic_id - b.topic_id);
                 setTopics(topics)
             } catch (error) {
@@ -58,7 +58,7 @@ export default function Share(props) {
         const formData = new FormData();
         formData.append("file", file);
         try {
-            const res = await axios.post("http://localhost:3030/api/uploads/upload-single", formData);
+            const res = await axios.post("/api/uploads/upload-single", formData);
             return res.data;
         } catch (e) {
             console.log(e.response.data.msg);  
@@ -89,7 +89,7 @@ export default function Share(props) {
         }
 
         try {
-            await axios.post("http://localhost:3030/api/posts/create", newPost)
+            await axios.post("/api/posts/create", newPost)
             window.location.reload();
         } catch (error) {
             console.log(error);

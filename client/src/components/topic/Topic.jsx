@@ -14,13 +14,13 @@ export default function Topic({topic, user}) {
   const addOrRemoveHandler = async () =>{
     if (isAdded) {      
       try {
-        await axios.put(`http://localhost:3030/api/topics/remove/${topic.topic_id}`, {user_id: user.user_id})
+        await axios.put(`/api/topics/remove/${topic.topic_id}`, {user_id: user.user_id})
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        await axios.put(`http://localhost:3030/api/topics/add/${topic.topic_id}`, {user_id: user.user_id})
+        await axios.put(`/api/topics/add/${topic.topic_id}`, {user_id: user.user_id})
       } catch (error) {
         console.log(error);
       }

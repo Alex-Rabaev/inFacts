@@ -47,7 +47,7 @@ export default function Messenger(props) {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(`http://localhost:3030/api/conversations/${user.user_id}`);
+        const res = await axios.get(`/api/conversations/${user.user_id}`);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -59,7 +59,7 @@ export default function Messenger(props) {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("http://localhost:3030/api/messages/" + currentChat?.conversation_id);
+        const res = await axios.get("/api/messages/" + currentChat?.conversation_id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -91,7 +91,7 @@ export default function Messenger(props) {
     });
 
     try {
-      const res = await axios.post("http://localhost:3030/api/messages/", message);
+      const res = await axios.post("/api/messages/", message);
       console.log(message);
       setMessages([...messages, res.data]);
       setNewMessage("");

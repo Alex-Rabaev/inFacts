@@ -33,7 +33,7 @@ function App() {
             if (!userData?.username) return;
     
             try {
-                const res = await axios.get(`http://localhost:3030/api/users?username=${userData.username}`);
+                const res = await axios.get(`/api/users?username=${userData.username}`);
                 setUser(res.data[0]);
             } catch (error) {
                 console.error("Error fetching user:", error);

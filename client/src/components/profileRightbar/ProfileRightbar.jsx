@@ -25,7 +25,7 @@ export default function ProfileRightbar(props) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendsList = await axios.get(`http://localhost:3030/api/users/follows/${user.user_id}`);
+        const friendsList = await axios.get(`/api/users/follows/${user.user_id}`);
         setFriends(friendsList.data)
       } catch (error) {
         console.log(error);
@@ -37,8 +37,8 @@ export default function ProfileRightbar(props) {
 //   useEffect(() => { 
 //     const getFriends = async () => {
 //       try {
-//         const followersResponse = await axios.get(`http://localhost:3030/api/users/follows/${user.user_id}`);
-//         const followingsResponse = await axios.get(`http://localhost:3030/api/users/followings/${user.user_id}`); // Assuming your API endpoint is similar for followings
+//         const followersResponse = await axios.get(`/api/users/follows/${user.user_id}`);
+//         const followingsResponse = await axios.get(`/api/users/followings/${user.user_id}`); // Assuming your API endpoint is similar for followings
         
 //         const followers = followersResponse.data;
 //         const followings = followingsResponse.data;
@@ -65,9 +65,9 @@ export default function ProfileRightbar(props) {
   const followHandler = async () => {
     try {
       if (followed) {
-        await axios.put(`http://localhost:3030/api/users/${currentUser.user_id}/unfollow`, {user_id: user.user_id});
+        await axios.put(`/api/users/${currentUser.user_id}/unfollow`, {user_id: user.user_id});
       } else {
-        await axios.put(`http://localhost:3030/api/users/${currentUser.user_id}/follow`, {user_id: user.user_id});
+        await axios.put(`/api/users/${currentUser.user_id}/follow`, {user_id: user.user_id});
       }
       setFollowed(!followed)
     } catch (error) {

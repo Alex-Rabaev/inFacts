@@ -13,7 +13,7 @@ export default function Rightbar({user}) {
     const source = axios.CancelToken.source();
 
     try {
-      const friendsList = await axios.get(`http://localhost:3030/api/users/follows/${userId}`, {
+      const friendsList = await axios.get(`/api/users/follows/${userId}`, {
         cancelToken: source.token,
       });
       setFriends(friendsList.data);
@@ -44,7 +44,7 @@ export default function Rightbar({user}) {
       <div className="rightbar">
         <div className="rightbarWrapper">
           {/* <div className="birthdayContainer">
-          <img className="birthdayImg" src="http://localhost:3030/images/gift.png" alt="" />
+          <img className="birthdayImg" src="/images/gift.png" alt="" />
           <span className="birthdayText">
             <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
           </span>

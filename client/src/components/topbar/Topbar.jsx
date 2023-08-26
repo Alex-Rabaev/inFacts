@@ -36,7 +36,7 @@ export default function Topbar(props) {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:3030/api/users/search?input=${encodeURIComponent(searchInput)}`);
+        const res = await fetch(`/api/users/search?input=${encodeURIComponent(searchInput)}`);
 
         const searchData = await res.json();
         if (res.status === 200) {

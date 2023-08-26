@@ -17,7 +17,7 @@ export default function Topics({user}) {
   useEffect(() => {
   const getAllTopics = async () => {
     try {
-        const res = await axios.get("http://localhost:3030/api/topics/all");
+        const res = await axios.get("/api/topics/all");
         setTopics(res.data)
       } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ const clickHandler = async () => {
   setIsFetching(!isFetching);
   try {
 
-    await axios.post("http://localhost:3030/api/posts/create", {user_id:user.user_id});
+    await axios.post("/api/posts/create", {user_id:user.user_id});
     window.location.reload();
   } catch (error) {
     console.error(error);
