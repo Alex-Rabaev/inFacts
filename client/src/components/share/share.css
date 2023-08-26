@@ -1,0 +1,188 @@
+.share {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 7px 1px 12px 7px rgba(102,102,102,0.52); 
+    box-shadow: 7px 1px 12px 7px rgba(102,102,102,0.52);
+}
+
+.shareWrapper {
+    padding: 10px;
+}
+
+.shareTop {
+    display: flex;
+    align-items: center;
+}
+
+.shareProfileImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    background-color: lightgoldenrodyellow;
+}
+
+.shareInput {
+    width: 80%; /* Use this if you want it to take full width */
+    resize: none; /* Prevents resizing */
+    height: 5em; /* Roughly two lines. Adjust if necessary */
+    border: none; /* Remove all borders */
+    border-bottom: 1px solid darkgray; /* Dark gray line for the bottom border */
+    outline: none; /* Optional: remove the blue outline that appears on focus */
+    padding: 5px 0; /* Some padding for better visual appeal */
+    font-size: 1em; /* Adjust font size if necessary */
+    overflow-y: auto; /* Allows scrolling if text exceeds the fixed height */
+    margin-bottom: 10px;
+}
+
+.shareInput:focus {
+    outline: none;
+}
+
+.shareHr {
+    margin: 20px;
+}
+
+.shareBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shareOptions {
+    display: flex;
+    margin-left: 20px;
+}
+
+.shareOption {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.shareIcon {
+    font-size: 18px;
+    margin-right: 3px;
+}
+
+.shareOptionText {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.shareButton {
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: lightslategrey;
+    font-weight: 500;
+    margin-right: 20px;
+    cursor: pointer;
+    color: antiquewhite;
+}
+
+.shareButton:disabled {
+    cursor: not-allowed;
+}
+
+.newFactButton {    
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: lightslategrey;
+    font-weight: 500;
+    margin-right: 15px;
+    cursor: pointer;
+    color: antiquewhite;
+}
+
+.newFactButton:disabled {
+    cursor: not-allowed;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectedImagePreview {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.removeFileButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: lightslategrey;
+  border: none;
+  cursor: pointer;
+  padding: 5px 8px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.linkInputWrapper {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-left: 60px;
+    margin-bottom: 10px; /* Space between each .linkInputWrapper */
+    border-bottom: 1px solid #ccc; /* Bottom border for .linkInputWrapper */
+    padding: 5px 0; /* Some padding to make it look nicer with the bottom border */
+}
+
+.linkInputWrapper input {
+    flex: 1; /* Takes up the maximum width available */
+    border: none; /* Removes default border */
+    outline: none; /* Removes the outline which appears on focus */
+    background-color: transparent; /* Ensures the input has no background */
+    padding: 5px; /* Some padding for the input to make it look nicer */
+}
+
+.linkInputWrapper button {
+    margin-left: 10px; /* Space between the input and the + button */
+    cursor: pointer;
+}
+
+.topicSelector {
+    margin: 15px 0;
+    width: 80%;
+    margin-left: 60px;
+    position: relative;  /* to position the arrow icon (if any) */
+}
+
+.topicSelector select {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 2px solid #333; /* simple bottom border */
+    background-color: transparent; 
+    font-size: 16px;
+    border-radius: 3px;
+    outline: none; /* remove default focus outline */
+    appearance: none; /* remove the default select arrow in some browsers */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.topicSelector select:focus {
+    border-color: #007BFF; /* Color when focused, choose your own if needed */
+}
+
+/* If you want to add a custom arrow (this is optional) */
+.topicSelector:after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;  /* so it doesn't interfere with the select input */
+}

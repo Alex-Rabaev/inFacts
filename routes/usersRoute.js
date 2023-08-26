@@ -3,11 +3,14 @@ import {
         _register, 
         _login, _logout, 
         _getAllUsers, 
-        _getUserById, 
+        _getUserByIdOrUsername, 
         _updateUserById, 
         _deleteUserById, 
         _followUser,
-        _unfollowUser 
+        _unfollowUser,
+        _getFriendsOfUser,
+        _getFollowingsOfUser,
+        _searchUsersByInput
     } from '../controllers/usersController.js';
 import { verifyToken } from '../middleware/VerifyToken.js';
 
@@ -34,7 +37,16 @@ users_router.put("/update/:id", _updateUserById);
 users_router.delete("/delete/:id", _deleteUserById);
 
 // get a user by id
-users_router.get("/:id", _getUserById);
+users_router.get("/", _getUserByIdOrUsername);
+
+// Search users by input
+users_router.get("/search", _searchUsersByInput);
+
+// get friends
+users_router.get("/follows/:user_id", _getFriendsOfUser);
+
+// get followings
+users_router.get("/followings/:user_id", _getFollowingsOfUser);
 
 // follow a user
 users_router.put("/:id/follow", _followUser);

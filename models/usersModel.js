@@ -1,16 +1,16 @@
 import { db } from "../config/db.js";
 
 // REGISTER 
-export const register = (username, email, firstname, lastname, hash) => {
+export const register = (username, email, firstname, lastname, hash, gender, profilepicture, coverpicture) => {
     return db('users')
-    .insert({username, email, firstname, lastname, password: hash}) // Pass an object
+    .insert({username, email, firstname, lastname, password: hash, gender, profilepicture, coverpicture}) // Pass an object
     .returning('user_id', 'username', 'email')
 }
 
 // LOGIN
 export const login = (username_or_email) => {
     return db('users')
-    .select('user_id', 'username', 'email', 'password')
+    .select('user_id', 'username', 'firstname', 'lastname', 'email', 'password')
     .where(function () {
       this.where('email', username_or_email).orWhere('username', username_or_email)
     })
@@ -32,8 +32,26 @@ export const getAllUsers = () => {
 // FIND BY ID
 export const getUserById = (userId) => {
     return db('users')
-    .select('user_id', 'username', 'email', 'firstname', 'lastname', 'description', 'country', 'city', 'followers', 'followings')
+    .select('*')
     .where({user_id: userId})
+}
+
+// FIND BY username
+export const getUserByUsername = (username) => {
+    return db('users')
+    .select('*')
+    .where({username})
+}
+
+
+// Search users by input (username, email, firstname or lastname)
+export const searchUsersByInput = (inputName) => {
+    return db('users')
+    .select('user_id','username', 'email', 'firstname', 'lastname', 'profilepicture')
+    .where('username', 'ILIKE', `%${inputName}%`)
+    .orWhere('email', 'ILIKE', `%${inputName}%`)
+    .orWhere('firstname', 'ILIKE', `%${inputName}%`)
+    .orWhere('lastname', 'ILIKE', `%${inputName}%`);
 }
 
 // UPDATE USER BY ID

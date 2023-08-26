@@ -1,4 +1,14 @@
-import { register, login, getAllUsers, updateLastLogin, getUserById, updateUserById, deleteUserById } from "../models/usersModel.js";
+import { 
+    register, 
+    login, 
+    getAllUsers, 
+    updateLastLogin, 
+    getUserById, 
+    getUserByUsername, 
+    updateUserById, 
+    deleteUserById,
+    searchUsersByInput
+ } from "../models/usersModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 // import cookieParser from "cookie-parser";
@@ -30,7 +40,9 @@ export const _login = async (req, res) => {
         const userid = row[0].user_id;
         const username = row[0].username;
         const email = row[0].email;
-        const accessToken = jwt.sign({userid, username, email}, secret, {expiresIn: "2 days"});
+        const firstname = row[0].firstname;
+        const lastname = row[0].lastname;
+        const accessToken = jwt.sign({userid, username, email, firstname, lastname}, secret, {expiresIn: "2 days"});
 
         await updateLastLogin(userid);
 
@@ -41,21 +53,25 @@ export const _login = async (req, res) => {
 
         res.json({token: accessToken});
     } catch (error) {
-        res.status(404).json({msg: "something went wrong"});
+        res.status(404).json({msg: "something went wrong", error});
     }
 }
 
 // register
 export const _register = (req, res) => {
-    const {username, email, firstname, lastname, password} = req.body;
+    const {username, email, firstname, lastname, password, gender} = req.body;
 
     const lower_email = email.toLowerCase();
     const lower_username = username.toLowerCase();
 
+    const profilepicture = `https://robohash.org/${lower_username}/?set=set4`;
+    const coverpicture = 'https://i.ibb.co/937FrCj/startingcoverpicture.png';
+    
+
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password + "", salt);
 
-    register(lower_username, lower_email, firstname, lastname, hash)
+    register(lower_username, lower_email, firstname, lastname, hash, gender, profilepicture, coverpicture)
     .then(row => {
         res.json(row)
     })
@@ -112,10 +128,12 @@ export const _deleteUserById = async (req, res) => {
     }
 }
 
-// get user by id
-export const _getUserById = async (req, res) => {
+// get user by id or username
+export const _getUserByIdOrUsername = async (req, res) => {
+    const userId = req.query.user_id;
+    const username = req.query.username;
     try {
-        const user = await getUserById(req.params.id);
+        const user = userId ? await getUserById(userId) : await getUserByUsername(username);
         console.log(user);
         if (!user.length) {
             return res.status(404).json({msg: "The user does not exist"});
@@ -126,6 +144,65 @@ export const _getUserById = async (req, res) => {
         return res.status(404).json({msg: "something went wrong"});
     }
     
+};
+
+// Search users by input
+export const _searchUsersByInput = async (req, res) => {
+    const input = req.query.input;
+    try {
+        const searchResult = await searchUsersByInput(input)
+        console.log(searchResult);
+        if (!searchResult.length) {
+            return res.status(404).json("The user does not exist");
+        } else {
+            return res.status(200).json(searchResult);
+        }
+    } catch (error) {
+        return res.status(404).json({msg: "something went wrong"});
+    }
+    
+};
+
+// get friends list
+export const _getFriendsOfUser = async (req, res) =>{
+    try {
+        const _user = await getUserById(req.params.user_id);
+        const user = _user[0];
+        const friends = await Promise.all(
+            user.followers.map(friendId => {
+                return getUserById(friendId)
+            })
+        )
+        let friendsList = [];
+        friends.map(friend => {
+            const {user_id, username, firstname, lastname, profilepicture} = friend[0];
+            friendsList.push({user_id, username, firstname, lastname, profilepicture});
+        });
+        res.status(200).json(friendsList)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+};
+
+// get followings list
+export const _getFollowingsOfUser = async (req, res) =>{
+    try {
+        const _user = await getUserById(req.params.user_id);
+        const user = _user[0];
+        const followings = await Promise.all(
+            user.followings.map(followingId => {
+                return getUserById(followingId)
+            })
+        )
+        let followingsList = [];
+        followings.map(following => {
+            const {user_id, username, firstname, lastname, profilepicture} = following[0];
+            followingsList.push({user_id, username, firstname, lastname, profilepicture});
+        });
+        res.status(200).json(followingsList)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 };
 
 // follow a user

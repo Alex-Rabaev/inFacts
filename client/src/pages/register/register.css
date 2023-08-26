@@ -1,0 +1,92 @@
+.register {
+    width: 100vw;
+    height: 100vh;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registerWrapper {
+    width: 70%;
+    height: 70%;
+    display: flex;
+}
+
+.registerLeft, .registerRight {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.registerLogo {
+    font-size: 50px;
+    font-weight: 800;
+    color: darkslategrey;
+    margin-bottom: 10px;
+}
+
+.registerDesc{
+    font-size: 24px;
+}
+
+.registerBox {
+    height: 500px;
+    padding: 20px;
+    background-color: azure;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.registerInput {
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+.namesBlock {
+    display: flex;
+    align-self: center;
+    gap: 15px
+}
+
+.namesBlock input {
+    margin: 5px;
+}
+
+.registerButton {
+    width: 80%;
+    align-self: center;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(52, 107, 107);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ifRegistered {
+    text-align: center;
+    color: rgb(52, 107, 107);
+}
+
+.registerLoginButton {
+    width: 60%;
+    align-self: center;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(40, 98, 198);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    justify-content: center;
+}

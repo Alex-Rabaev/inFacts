@@ -1,0 +1,123 @@
+.post {
+    width: 100%;
+    border-radius: 10px;
+    -webkit-box-shadow: 7px 1px 12px 7px rgba(102,102,102,0.52); 
+    box-shadow: 7px 1px 12px 7px rgba(102,102,102,0.52);
+    margin: 30px 0;
+}
+
+.postWrappr {
+    padding: 10px;
+}
+
+.postTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postTopLeft {
+    display: flex;
+    align-items: center;
+}
+
+.postProfileImg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: lightgoldenrodyellow;
+}
+
+.postUsername {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.postDate {
+    font-size: 12px;
+}
+
+.postCenter {
+    margin: 20px;
+}
+
+.postImg {
+    margin-top: 20px;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.postBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postBottomLeft {
+    display: flex;
+    align-items: center;
+}
+
+.likeIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.postLikeCounter {
+    font-size: 15px;
+}
+
+.postCommentText {
+    cursor: pointer;
+    border-bottom: 1px dashed gray;
+    font-size: 15px;
+}
+
+.addIcon {
+    font-size: 18px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.postAddText {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.proofLink {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 5px 10px;
+    text-decoration: none;   /* Removes underline */
+    background-color: #f1f1f1; /* Light grey background */
+    border-radius: 5px;      /* Rounded corners */
+    color: #333;             /* Darker text color for better contrast */
+    font-weight: 500;        /* Semi-bold text */
+    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+}
+
+.proofLink:hover {
+    background-color: #e1e1e1; /* Darker grey on hover */
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.postTypeIcon {
+    font-size: 18px;
+    margin-right: 3px;
+}
+
+.postTypeText {
+    font-size: 14px;
+    font-weight: 500;
+}

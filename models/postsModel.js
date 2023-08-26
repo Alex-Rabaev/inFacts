@@ -1,9 +1,9 @@
 import { db } from "../config/db.js";
 
 // CREATE A POST 
-export const createPost = (user_id, description, img) => {
+export const createPost = (user_id, description, img, isfact, prooflinks, img_location, topic_id, topic_img) => {
     return db('posts')
-    .insert({user_id, description, img}) // Pass an object
+    .insert({user_id, description, img, isfact, prooflinks, img_location, topic_id, topic_img}) // Pass an object
     .returning('*')
 }
 
@@ -32,4 +32,11 @@ export const deletePostById = (user_id, postId) => {
     return db('posts')
     .where({post_id: postId})
     .del();
+}
+
+// GET ALL POSTS OF A USER BY user_id
+export const getPostsByUserId = (userId) => {
+    return db('posts')
+    .select('*')
+    .where({user_id: userId})
 }

@@ -1,5 +1,12 @@
 import express from 'express';
-import { _createPost, _updatePostById, _deletePostById, _likePost, _getPostById } from '../controllers/postsController.js';
+import { 
+        _createPost, 
+        _updatePostById, 
+        _deletePostById, 
+        _likePost, _getPostById, 
+        _getPostsByUserId,
+        _getFollowersPosts
+    } from '../controllers/postsController.js';
 
 const posts_router = express.Router();
 
@@ -18,7 +25,10 @@ posts_router.put("/like/:id", _likePost);
 // get a post
 posts_router.get("/:id", _getPostById);
 
-// get followers posts
+// get all posts of a user by user_id
+posts_router.get("/user/:id", _getPostsByUserId);
 
+// get all posts of user followers 
+posts_router.get("/followers/:id", _getFollowersPosts);
 
 export default posts_router;

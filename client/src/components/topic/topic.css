@@ -1,0 +1,20 @@
+
+
+.addRemoveTopicButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: rgb(52, 107, 77);
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addRemoveTopicButton:focus {
+  outline: none;
+}
