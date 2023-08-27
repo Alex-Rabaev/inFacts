@@ -51,6 +51,6 @@ app.use("/api/topics", topics_router);
 app.use("/api/conversations", conversations_router);
 app.use("/api/messages", messages_router);
 
-app.listen(process.env.PORT, () => {
-    console.log(`Backend server is running on port ${process.env.PORT}`);
+app.listen(process.env.PORT || 10000, () => {
+    console.log(`Backend server is running on port ${process.env.PORT || 10000}`);
 })
