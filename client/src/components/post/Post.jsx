@@ -45,7 +45,7 @@ export default function Post({post, user_id, currentUser_id}) {
             <div className="postTop">
                 <div className="postTopLeft">
                   {/* <Link to={`profile/${user.username}`}> didn't worked correctly for some reason */}
-                    <Link to={`http://localhost:3000/profile/${user.username}`}>
+                    <Link to={`/profile/${user.username}`}>
                     <img src={user.profilepicture} alt="" className="postProfileImg" />
                     </Link>
                     <span className="postUsername">
