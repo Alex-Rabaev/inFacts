@@ -19,11 +19,12 @@ export default function Leftbar({user}) {
   const [followings, setFollowings] = useState([]);
   const [isFetching, setIsFetching] = useState(false)
   const currentUserId = user?.user_id
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const generateFactClickHandler = async () => {
   setIsFetching(!isFetching);
   try {
-    await axios.post("/api/facts/new_fact_post", {user_id: user?.user_id});
+    await axios.post(`${BASE_URL}/api/facts/new_fact_post`, {user_id: user?.user_id});
     window.location.reload();
   } catch (error) {
     console.error(error);
@@ -34,8 +35,8 @@ useEffect(() => {
     const getAllFriends = async () => {
       if (!currentUserId) return;
       try {
-        const friendsList = await axios.get(`/api/users/follows/${user?.user_id}`);
-        const followingsList = await axios.get(`/api/users/followings/${user?.user_id}`);
+        const friendsList = await axios.get(`${BASE_URL}/api/users/follows/${user?.user_id}`);
+        const followingsList = await axios.get(`${BASE_URL}/api/users/followings/${user?.user_id}`);
         setFriends(friendsList.data)
         setFollowings(followingsList.data)
       } catch (error) {

@@ -6,26 +6,23 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 export default function ProfileRightbar(props) {
-  // console.log({user});
   const [friends, setFriends] = useState([]);
   const currentUser = props.user;
   const [followed, setFollowed] = useState(false);
-  // console.log(props.visitedUser);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   
   // checking profile page owner
   const visitedUser = props.visitedUser ? props.visitedUser : currentUser;
   const checkProfileOwner = currentUser.user_id === visitedUser.user_id;
-  // console.log(checkProfileOwner);
   
   // chosing user for showing info
   const user = checkProfileOwner ? currentUser : visitedUser;
-  // console.log(user);
   
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendsList = await axios.get(`/api/users/follows/${user.user_id}`);
+        const friendsList = await axios.get(`${BASE_URL}/api/users/follows/${user.user_id}`);
         setFriends(friendsList.data)
       } catch (error) {
         console.log(error);
@@ -34,25 +31,6 @@ export default function ProfileRightbar(props) {
     getFriends();
   }, [user.user_id]);
 
-//   useEffect(() => { 
-//     const getFriends = async () => {
-//       try {
-//         const followersResponse = await axios.get(`/api/users/follows/${user.user_id}`);
-//         const followingsResponse = await axios.get(`/api/users/followings/${user.user_id}`); // Assuming your API endpoint is similar for followings
-        
-//         const followers = followersResponse.data;
-//         const followings = followingsResponse.data;
-
-//         // Finding users that exist in both followers and followings lists
-//         const mutualFriends = followers.filter(follower => followings.includes(follower));
-
-//         setFriends(mutualFriends);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     }
-//     getFriends();
-// }, [user.user_id]);
   
   useEffect(() => {
       if (!checkProfileOwner) {
@@ -65,9 +43,9 @@ export default function ProfileRightbar(props) {
   const followHandler = async () => {
     try {
       if (followed) {
-        await axios.put(`/api/users/${currentUser.user_id}/unfollow`, {user_id: user.user_id});
+        await axios.put(`${BASE_URL}/api/users/${currentUser.user_id}/unfollow`, {user_id: user.user_id});
       } else {
-        await axios.put(`/api/users/${currentUser.user_id}/follow`, {user_id: user.user_id});
+        await axios.put(`${BASE_URL}/api/users/${currentUser.user_id}/follow`, {user_id: user.user_id});
       }
       setFollowed(!followed)
     } catch (error) {

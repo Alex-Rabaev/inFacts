@@ -18,11 +18,12 @@ export default function Feed(props) {
   const user = checkProfileOwner ? currentUser : visitedUser;
   // console.log(user);
   const user_id = user.user_id;
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/posts/followers/${user_id}`)
+        const res = await fetch(`${BASE_URL}/api/posts/followers/${user_id}`)
         const data = await res.json();
         if (res.status === 200) {
           setPosts(data.sort((p1, p2) => {

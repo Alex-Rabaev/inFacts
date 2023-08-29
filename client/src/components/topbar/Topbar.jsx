@@ -9,6 +9,7 @@ import Follows from '../follows/Follows';
 
 
 export default function Topbar(props) {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate()
   const logoutHandler = async () => {
     localStorage.removeItem('token');
@@ -36,7 +37,7 @@ export default function Topbar(props) {
         return;
       }
       try {
-        const res = await fetch(`/api/users/search?input=${encodeURIComponent(searchInput)}`);
+        const res = await fetch(`${BASE_URL}/api/users/search?input=${encodeURIComponent(searchInput)}`);
 
         const searchData = await res.json();
         if (res.status === 200) {

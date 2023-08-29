@@ -11,13 +11,15 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Topics({user}) {
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
   const [topics, setTopics] = useState([]);
   const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
   const getAllTopics = async () => {
     try {
-        const res = await axios.get("/api/topics/all");
+        const res = await axios.get(`${BASE_URL}/api/topics/all`);
         setTopics(res.data)
       } catch (error) {
         console.log(error);
@@ -32,7 +34,7 @@ const clickHandler = async () => {
   setIsFetching(!isFetching);
   try {
 
-    await axios.post("/api/posts/create", {user_id:user.user_id});
+    await axios.post(`${BASE_URL}/api/posts/create`, {user_id:user.user_id});
     window.location.reload();
   } catch (error) {
     console.error(error);

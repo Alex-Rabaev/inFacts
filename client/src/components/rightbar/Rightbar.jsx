@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Rightbar({user}) {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [friends, setFriends] = useState([]);
 
 
@@ -13,7 +14,7 @@ export default function Rightbar({user}) {
     const source = axios.CancelToken.source();
 
     try {
-      const friendsList = await axios.get(`/api/users/follows/${userId}`, {
+      const friendsList = await axios.get(`${BASE_URL}/api/users/follows/${userId}`, {
         cancelToken: source.token,
       });
       setFriends(friendsList.data);

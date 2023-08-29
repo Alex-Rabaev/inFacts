@@ -11,10 +11,11 @@ export default function Login() {
   const passwordRef = useRef();
   const navigate = useNavigate();
   const [isFetching, setIsFetching] = useState(false)
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const submitHandler = async (event) => {
         event.preventDefault();
-            const res = await axios.post('/api/users/login', {
+            const res = await axios.post(`${BASE_URL}/api/users/login`, {
                     username_or_email: usernameOrEmailRef.current.value,
                     password: passwordRef.current.value
                 })

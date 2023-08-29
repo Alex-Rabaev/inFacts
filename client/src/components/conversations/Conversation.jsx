@@ -4,13 +4,14 @@ import "./conversation.css";
 
 export default function Conversation({ key, conversation, currentUser }) {
   const [user, setUser] = useState(null);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser.user_id);
 
     const getUser = async () => {
       try {
-        const res = await axios("/api/users?user_id=" + friendId);
+        const res = await axios(`${BASE_URL}/api/users?user_id=${friendId}`);
         setUser(res.data[0]);
       } catch (err) {
         console.log(err);

@@ -5,11 +5,12 @@ import "./chatOnline.css";
 export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const res = await axios.get("/api/users/followings/" + currentId);
+        const res = await axios.get(`${BASE_URL}/api/users/followings/${currentId}`);
         setFriends(res.data);
       } catch (error) {
         console.log(error);
@@ -26,7 +27,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
   const handleClick = async (user) => {
     try {
       const res = await axios.get(
-        `/api/conversations//find/${currentId}/${user.user_id}`
+        `${BASE_URL}/api/conversations//find/${currentId}/${user.user_id}`
       );
       setCurrentChat(res.data);
     } catch (err) {

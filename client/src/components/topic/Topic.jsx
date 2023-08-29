@@ -5,7 +5,8 @@ import './topic.css'
 import axios from 'axios';
 
 export default function Topic({topic, user}) {
-  const [isAdded, setIisAdded] = useState(false)
+  const [isAdded, setIisAdded] = useState(false);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     setIisAdded(topic.added_by_users_arr.includes(user.user_id));
@@ -14,13 +15,13 @@ export default function Topic({topic, user}) {
   const addOrRemoveHandler = async () =>{
     if (isAdded) {      
       try {
-        await axios.put(`/api/topics/remove/${topic.topic_id}`, {user_id: user.user_id})
+        await axios.put(`${BASE_URL}/api/topics/remove/${topic.topic_id}`, {user_id: user.user_id})
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        await axios.put(`/api/topics/add/${topic.topic_id}`, {user_id: user.user_id})
+        await axios.put(`${BASE_URL}/api/topics/add/${topic.topic_id}`, {user_id: user.user_id})
       } catch (error) {
         console.log(error);
       }

@@ -10,6 +10,7 @@ import axios from 'axios';
 
 export default function Profile({currentUser}) {
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const user = currentUser;
   const [visitedUser, setVisitedUser] = useState({});
 
@@ -19,7 +20,7 @@ export default function Profile({currentUser}) {
   
   const fetchUser = async () => {
     try {
-      const res = await axios.get(`/api/users?username=${username}`);
+      const res = await axios.get(`${BASE_URL}/api/users?username=${username}`);
       setVisitedUser(res.data[0]);
     } catch (error) {
       console.log(error);

@@ -16,6 +16,7 @@ export default function Post({post, user_id, currentUser_id}) {
   const [isLiked, setIsLiked] = useState(false)
   // console.log(currentUser_id);
   const [user, setUser] = useState({})
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser_id));
@@ -23,15 +24,15 @@ export default function Post({post, user_id, currentUser_id}) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/api/users?user_id=${post.user_id}`);
+      const res = await axios.get(`${BASE_URL}/api/users?user_id=${post.user_id}`);
       setUser(res.data[0]);
     }
     fetchUser();
-  }, [post.user_id])
+  }, [BASE_URL, post.user_id])
 
   const likeHandler = async () =>{
     try {
-      axios.put(`/api/posts/like/${post.post_id}`, {user_id: user_id})
+      axios.put(`${BASE_URL}/api/posts/like/${post.post_id}`, {user_id: user_id})
     } catch (error) {
       console.log(error);
     }

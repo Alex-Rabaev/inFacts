@@ -3,6 +3,8 @@ import './register.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
     
@@ -17,15 +19,6 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const username = usernameRef.current.value;
-        // const email = emailRef.current.value;
-        // const firstname = firstnameRef.current.value;
-        // const lastname = lastnameRef.current.value;
-        // const password = passwordRef.current.value;
-        // const passwordAgain = passwordAgainRef.current.value;
-        
-        // console.log(password !== passwordAgain);
-
         if (passwordRef.current.value !== passwordAgainRef.current.value) {
             setMessage("Passwords don't match");
         } else {
@@ -38,7 +31,7 @@ export default function Register() {
                 password: passwordRef.current.value
             })
             try {
-                const res = await fetch('/api/users/register', {
+                const res = await fetch(`${BASE_URL}/api/users/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

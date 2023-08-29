@@ -8,10 +8,13 @@ import Profile from "./pages/profile/Profile";
 import Topics from "./pages/topics/Topics";
 import { useEffect, useState } from "react";
 import axios from 'axios'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 
 function App() {
+    
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     const [user, setUser] = useState({});
     const [userData, setUserData] = useState(null);
 
@@ -33,14 +36,15 @@ function App() {
             if (!userData?.username) return;
     
             try {
-                const res = await axios.get(`/api/users?username=${userData.username}`);
+                const res = await axios.get(`${BASE_URL}/api/users?username=${userData.username}`);
                 setUser(res.data[0]);
             } catch (error) {
                 console.error("Error fetching user:", error);
             }
         };
         userData && fetchUser();
-    }, [userData]);
+    }, [BASE_URL, userData]);
+
   return( 
   <>
     <Routes>

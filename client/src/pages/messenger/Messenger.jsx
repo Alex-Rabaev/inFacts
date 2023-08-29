@@ -8,6 +8,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 export default function Messenger(props) {
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -47,7 +48,7 @@ export default function Messenger(props) {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(`/api/conversations/${user.user_id}`);
+        const res = await axios.get(`${BASE_URL}/api/conversations/${user.user_id}`);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -59,7 +60,7 @@ export default function Messenger(props) {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/api/messages/" + currentChat?.conversation_id);
+        const res = await axios.get(`${BASE_URL}/api/messages/` + currentChat?.conversation_id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -91,7 +92,7 @@ export default function Messenger(props) {
     });
 
     try {
-      const res = await axios.post("/api/messages/", message);
+      const res = await axios.post(`${BASE_URL}/api/messages/`, message);
       console.log(message);
       setMessages([...messages, res.data]);
       setNewMessage("");
