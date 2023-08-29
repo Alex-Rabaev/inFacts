@@ -39,7 +39,7 @@ export const _getProofSearchQuery = (req, res) => {
 export async function _getTop3Links(req, res) {
 
     const {query} = req.body;
-    console.log('ssssssss',query);
+    // console.log('ssssssss',query);
 
         
     const links = await googleSearchRequest(query);
@@ -61,11 +61,11 @@ async function googleSearchRequest(query) {
     const apiKey = process.env.GOOGLE_CLOUD_API_KEY; // Replace with your Google Cloud API key
     const cx = process.env.CUSTOM_SEARCH_ENGINE_ID; // Replace with your Custom Search Engine ID
     const url = `https://www.googleapis.com/customsearch/v1?q=${query}&key=${apiKey}&cx=${cx}&num=3`;
-    console.log('url in googleSearchRequest', url);
+    // console.log('url in googleSearchRequest', url);
     const response = await fetch(url);
-    console.log('url in googleSearchRequest', response);
+    // console.log('url in googleSearchRequest', response);
     const data = await response.json();
-    console.log('data in googleSearchRequest', data);
+    // console.log('data in googleSearchRequest', data);
 
     // console.log('bbbbbbb=>>>>',data);
     return data.items.map(item => item.link);
@@ -120,12 +120,12 @@ export const _createFactPost = async (req, res) => {
         }
         const randomIndex = Math.floor(Math.random() * topicIds.length);
         const randomTopicId = topicIds[randomIndex];
-        console.log(randomTopicId);
+        // console.log(randomTopicId);
 
         const topic_info = await getTopicById(randomTopicId)
 
-        console.log("Topic_info 111111 ------->>>>>", topic_info[0]);
-        console.log("Topic_info ===>", topic_info, topic_info[0].topic_name, topic_info[0].topic_img);
+        // console.log("Topic_info 111111 ------->>>>>", topic_info[0]);
+        // console.log("Topic_info ===>", topic_info, topic_info[0].topic_name, topic_info[0].topic_img);
 
         const topic_name = topic_info[0].topic_name
         const topic_img = topic_info[0].topic_img
@@ -134,23 +134,23 @@ export const _createFactPost = async (req, res) => {
         const factResponse =  await baseGptRequest(`Tell me an interesting fact about something on ${topic_name} topic (${topic_desc}), 
     without greetings and entry words like "One interesting fact about ${topic_name} is". Minimum text size 300 characters, Maximum text size 900 characters`);
         const description = factResponse;
-        console.log("after getting fact response", factResponse);
+        // console.log("after getting fact response", factResponse);
 
         // Step 2: Generate a search query for the fact
         const searchQueryResponse = await baseGptRequest(`${description}. Give me 1 good and short query for searching proof information of this fact in google`);
         const query = searchQueryResponse.replace(/^"|"$/g, '');
-        console.log("after getting query for google --> ", query);
+        // console.log("after getting query for google --> ", query);
 
         // Step 3: Get the top 3 proof links using the search query
 
         const linksResponse = await googleSearchRequest(query);
-        console.log("linksResponse ----->>>>>>", linksResponse);
+        // console.log("linksResponse ----->>>>>>", linksResponse);
 
 
         // Gather other information
         const user_id = 21; // This could be dynamically determined based on the logged-in user or passed in via the request
         const isfact = true;
-        console.log(isfact);
+        // console.log(isfact);
 
         // Step 4: Create the post object
         const postObject = {
@@ -161,7 +161,7 @@ export const _createFactPost = async (req, res) => {
             topic_img,
             topic_id: randomTopicId
         };
-        console.log("main object ----> ", postObject);
+        // console.log("main object ----> ", postObject);
 
         // Step 5: Insert the post object into the posts table
         // This depends on your DB setup, so you'd use whatever method you have in place to insert data into the posts table

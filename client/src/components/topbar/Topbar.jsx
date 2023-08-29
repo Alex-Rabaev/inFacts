@@ -31,7 +31,7 @@ export default function Topbar(props) {
 
   useEffect(() => {
     const searchUsers = async () => {
-      console.log(searchInput);
+      // console.log(searchInput);
       if(searchInput.length===0){
         setSearchResults([]);
         return;
@@ -45,7 +45,7 @@ export default function Topbar(props) {
         } else {
           setSearchResults([]);
         }
-        console.log(searchResults);
+        // console.log(searchResults);
       } catch (error) {
         console.error('Error searching:', error);
       }

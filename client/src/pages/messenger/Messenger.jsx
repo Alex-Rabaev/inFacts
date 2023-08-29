@@ -93,7 +93,7 @@ export default function Messenger(props) {
 
     try {
       const res = await axios.post(`${BASE_URL}/api/messages/`, message);
-      console.log(message);
+      // console.log(message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {

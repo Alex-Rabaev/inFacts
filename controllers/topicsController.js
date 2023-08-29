@@ -53,17 +53,17 @@ export const _removeUserFromTopic = async (req, res) => {
         const _topic = await getTopicById(req.params.id);
         const _currentUser = await getUserById(req.body.user_id);
         const topic = _topic[0];
-        console.log(topic);
+        // console.log(topic);
         const currentUser = _currentUser[0];
-        console.log(currentUser);
+        // console.log(currentUser);
 
         if (currentUser.user_topics.includes(topic.topic_id)) {
-            console.log('in if statement');
+            // console.log('in if statement');
             const updatedTopicUsers = topic.added_by_users_arr.filter(id => id !== currentUser.user_id);
-            console.log(updatedTopicUsers);
+            // console.log(updatedTopicUsers);
             await addUserToTopic(topic.topic_id, {added_by_users_arr: updatedTopicUsers});
             const updatedUserTopics = currentUser.user_topics.filter(id => id !== topic.topic_id);
-            console.log(updatedUserTopics);
+            // console.log(updatedUserTopics);
             await updateUserById(currentUser.user_id, {user_topics: updatedUserTopics});
             res.status(200).json("topic has been removed");
         } else {

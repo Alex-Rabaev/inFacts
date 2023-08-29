@@ -6,7 +6,7 @@ export const _addMessage = (req, res) => {
 
     addMessage(conversation_id, sender_id, text)
     .then(row => {
-        console.log('in then');
+        // console.log('in then');
         res.json(row)
     })
     .catch(err => {

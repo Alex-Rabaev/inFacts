@@ -18,7 +18,7 @@ export default function Rightbar({user}) {
         cancelToken: source.token,
       });
       setFriends(friendsList.data);
-      console.log(friendsList.data);
+      // console.log(friendsList.data);
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Cancelled previous request");

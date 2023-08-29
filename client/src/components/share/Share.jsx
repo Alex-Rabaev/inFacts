@@ -34,14 +34,14 @@ export default function Share(props) {
             }
             }
         getAllTopics();
-        console.log(topics);
+        // console.log(topics);
     }, []);
 
 
     const postOrFactHandler = () => {
-        console.log(isFact);
+        // console.log(isFact);
         setPostOrFact(!isFact);
-        console.log(isFact);
+        // console.log(isFact);
     }
 
     const addLink = () => {
@@ -70,7 +70,7 @@ export default function Share(props) {
     const submitHandler = async (event) => {
         event.preventDefault();
         setIsFetching(!isFetching);
-        console.log("selectedTopic", selectedTopic);
+        // console.log("selectedTopic", selectedTopic);
         const matchedTopic = topics.find(topic => topic.topic_id === parseInt(selectedTopic));
         const newPost = !isFact ? {
             user_id: user.user_id,
@@ -83,7 +83,7 @@ export default function Share(props) {
             topic_id: selectedTopic,
             topic_img: matchedTopic ? matchedTopic.topic_img : null,
         }
-        console.log("newPost ---->>>", newPost);
+        // console.log("newPost ---->>>", newPost);
         if (file) {
             const uploadedFileData = await uploadFile();
             newPost.img = uploadedFileData[0].id;

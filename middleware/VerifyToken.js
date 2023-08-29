@@ -8,7 +8,7 @@ export const verifyToken = (req, res, next) => {
     const accessToken = req.cookies.token || req.headers['x-access-token'];
     // const refreshToken = req.cookies.refreshToken
 
-    console.log('my token =>', accessToken);
+    // console.log('my token =>', accessToken);
 
     if (!accessToken) return res.status(401).json({msg: 'unauthorized'})
 

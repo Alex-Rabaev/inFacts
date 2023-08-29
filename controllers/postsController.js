@@ -100,10 +100,10 @@ export const _getFollowersPosts = async (req, res) => {
     try {
         const _currentUser = await getUserById(req.params.id);
         const currentUser = _currentUser[0];
-        console.log(currentUser);
+        // console.log(currentUser);
 
         const userPosts = await getPostsByUserId(currentUser.user_id);
-        console.log(userPosts);
+        // console.log(userPosts);
         const followsPosts = await Promise.all(currentUser.followers.map((fol_id) =>{
             return getPostsByUserId(fol_id);
         }));

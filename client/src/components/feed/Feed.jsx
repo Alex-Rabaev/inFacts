@@ -35,7 +35,7 @@ export default function Feed(props) {
       }
     }
     fetchPosts();
-    console.log(user_id);
+    // console.log(user_id);
   }, [user_id])
 
   return (

@@ -134,7 +134,7 @@ export const _getUserByIdOrUsername = async (req, res) => {
     const username = req.query.username;
     try {
         const user = userId ? await getUserById(userId) : await getUserByUsername(username);
-        console.log(user);
+        // console.log(user);
         if (!user.length) {
             return res.status(404).json({msg: "The user does not exist"});
         } else {
@@ -151,7 +151,7 @@ export const _searchUsersByInput = async (req, res) => {
     const input = req.query.input;
     try {
         const searchResult = await searchUsersByInput(input)
-        console.log(searchResult);
+        // console.log(searchResult);
         if (!searchResult.length) {
             return res.status(404).json("The user does not exist");
         } else {
