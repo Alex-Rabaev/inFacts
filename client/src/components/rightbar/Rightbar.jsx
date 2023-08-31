@@ -8,36 +8,36 @@ export default function Rightbar({user}) {
   const [friends, setFriends] = useState([]);
 
 
-  const getFriends = async (userId) => {
-    if (!userId) return;
-    
-    const source = axios.CancelToken.source();
-
-    try {
-      const friendsList = await axios.get(`${BASE_URL}/api/users/follows/${userId}`, {
-        cancelToken: source.token,
-      });
-      setFriends(friendsList.data);
-      // console.log(friendsList.data);
-    } catch (error) {
-      if (axios.isCancel(error)) {
-        console.log("Cancelled previous request");
-      } else {
-        console.log(error);
-      }
-    }
-
-    return () => source.cancel();
-  }
-
+  
   useEffect(() => {
+    const getFriends = async (userId) => {
+      if (!userId) return;
+      
+      const source = axios.CancelToken.source();
+  
+      try {
+        const friendsList = await axios.get(`${BASE_URL}/api/users/follows/${userId}`, {
+          cancelToken: source.token,
+        });
+        setFriends(friendsList.data);
+        // console.log(friendsList.data);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Cancelled previous request");
+        } else {
+          console.log(error);
+        }
+      }
+  
+      return () => source.cancel();
+    }
     getFriends(user?.user_id);
 
     return () => {
       // This will cancel the request if Rightbar is unmounted or if user changes before the request completes
       getFriends();
     }
-  }, [user.user_id]);
+  }, [BASE_URL, user.user_id]);
 
   
   return (

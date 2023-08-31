@@ -55,7 +55,7 @@ export default function Messenger(props) {
       }
     };
     getConversations();
-  }, [user]);
+  }, [user, BASE_URL]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -67,7 +67,7 @@ export default function Messenger(props) {
       }
     };
     getMessages();
-  }, [currentChat]);
+  }, [currentChat, BASE_URL]);
 
   const handleConversationClick = (conversation) => {
     setCurrentChat(conversation);

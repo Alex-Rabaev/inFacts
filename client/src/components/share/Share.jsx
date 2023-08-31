@@ -35,7 +35,7 @@ export default function Share(props) {
             }
         getAllTopics();
         // console.log(topics);
-    }, []);
+    }, [BASE_URL]);
 
 
     const postOrFactHandler = () => {

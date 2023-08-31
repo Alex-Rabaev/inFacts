@@ -51,7 +51,7 @@ export default function Topbar(props) {
       }
     }
     searchUsers();
-  },[searchInput])
+  },[searchInput, BASE_URL])
   // console.log(props);
   const userData = props.user;
 
