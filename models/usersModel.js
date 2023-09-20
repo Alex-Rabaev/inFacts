@@ -36,6 +36,13 @@ export const getUserById = (userId) => {
     .where({user_id: userId})
 }
 
+export const getUserByIds = async (userIds) => {
+    const x = await db('users')
+    .select('*')
+    .whereIn("user_id", userIds);
+    return x;
+}
+
 // FIND BY username
 export const getUserByUsername = (username) => {
     return db('users')

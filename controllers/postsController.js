@@ -1,4 +1,4 @@
-import { createPost, getPostById, updatePostById, updateLastUpdate, deletePostById, getPostsByUserId } from "../models/postsModel.js";
+import { createPost, getPostById, updatePostById, updateLastUpdate, deletePostById, getPostsByUserId, getPostsByUserIds } from "../models/postsModel.js";
 import { getUserById } from "../models/usersModel.js";
 
 // create a post
@@ -97,23 +97,27 @@ export const _getPostsByUserId = async (req, res) => {
 
 // get all posts of followers
 export const _getFollowersPosts = async (req, res) => {
+    console.log("in _getFollowersPosts ----->>>> before try");
     try {
+        console.log("in _getFollowersPosts ----->>>> in try begin");
         const _currentUser = await getUserById(req.params.id);
+        console.log("in _getFollowersPosts 1 ----->>>>", _currentUser);
         const currentUser = _currentUser[0];
-        // console.log(currentUser);
+        console.log("in _getFollowersPosts 2 ----->>>>", currentUser);
 
         const userPosts = await getPostsByUserId(currentUser.user_id);
-        // console.log(userPosts);
-        const followsPosts = await Promise.all(currentUser.followers.map(async (fol_id) =>{
-            return await getPostsByUserId(fol_id);
-        }));
+        console.log("in _getFollowersPosts 3  userPosts  ----->>>>", userPosts);
+        // const followsPosts = await Promise.all(currentUser.followers.map(async (fol_id) =>{
+        //     return await getPostsByUserId(fol_id);
+        // }));
+        const followsPosts = await getPostsByUserIds(currentUser.followers)
         const allUserPosts = userPosts.concat(...followsPosts);
         if (!allUserPosts.length) {
-            return res.status(404).json({msg: "You and those you follow have not made any posts yet"});
+            return res.status(200).json({msg: "You and those you follow have not made any posts yet"});
         } else {
             return res.status(200).json(allUserPosts);
         }
     } catch (error) {
-        return res.status(404).json({msg: "something went wrong"});
+        return res.status(404).json({msg: "something went wrong", error});
     }
 };

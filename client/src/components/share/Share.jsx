@@ -170,9 +170,9 @@ export default function Share(props) {
                         control={<Switch onChange={postOrFactHandler}/>} 
                         label={isFact ? "Fact" : "Post"} />
                     </div>
-                    <button className="newFactButton" type='button' disabled={isFetching}>
+                    {/* <button className="newFactButton" type='button' disabled={isFetching}>
                         {isFetching ? <CircularProgress color="success" size={'15px'}/> : "New Fact"}
-                    </button>
+                    </button> */}
                     <button className="shareButton" type='submit' disabled={isFetching}>
                         {isFetching ? <CircularProgress color="success" size={'15px'}/> : "Submit"} 
                     </button>

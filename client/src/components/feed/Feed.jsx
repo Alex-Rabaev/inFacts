@@ -23,14 +23,17 @@ export default function Feed(props) {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      if (!user_id) return;
+
       try {
+        console.log("in feed useeffect, in try begin");
         const res = await axios.get(`${BASE_URL}/api/posts/followers/${user_id}`)
-        // const data = await res.json();
+        console.log("in feed useeffect, after axios");
         if (res.status === 200) {
-          setPosts(res.data);
-          // setPosts(data.sort((p1, p2) => {
-          //   return new Date(p2.created_at) - new Date(p1.created_at);
-          // }));       
+          // setPosts(res.data);
+          setPosts(res.data.sort((p1, p2) => {
+            return new Date(p2.created_at) - new Date(p1.created_at);
+          }));       
         } 
       } catch (error) {
         console.log(error);

@@ -35,8 +35,18 @@ export const deletePostById = (user_id, postId) => {
 }
 
 // GET ALL POSTS OF A USER BY user_id
-export const getPostsByUserId = (userId) => {
-    return db('posts')
+export const getPostsByUserId = async (userId) => {
+    console.log("in getPostsByUserId ________________ !!!!!!!!!, user_id = ", userId);
+    const x = await db('posts')
     .select('*')
     .where({user_id: userId})
+    console.log("x =======>>>>", x);
+    return x;
+}
+
+export const getPostsByUserIds = async (userIds) => {
+    const x = await db('posts')
+    .select('*')
+    .whereIn("user_id", userIds)
+    return x;
 }

@@ -7,7 +7,8 @@ import {
     getUserByUsername, 
     updateUserById, 
     deleteUserById,
-    searchUsersByInput
+    searchUsersByInput,
+    getUserByIds
  } from "../models/usersModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -165,17 +166,21 @@ export const _searchUsersByInput = async (req, res) => {
 
 // get friends list
 export const _getFriendsOfUser = async (req, res) =>{
+    console.log("in _getFriendsOfUser before try");
     try {
+        console.log("in _getFriendsOfUser after try, req.params.user_id ---->>>", req.params.user_id);
         const _user = await getUserById(req.params.user_id);
-        const user = _user[0];
-        const friends = await Promise.all(
-            user.followers.map(friendId => {
-                return getUserById(friendId)
-            })
-        )
+        console.log("in _getFriendsOfUser, user ----->>>>", _user);
+        const user = await _user[0];
+        // const friends = await Promise.all(
+        //     user.followers.map(friendId => {
+        //         return getUserById(friendId)
+        //     })
+        // )
+        const friends = await getUserByIds(user.followers)
         let friendsList = [];
         friends.map(friend => {
-            const {user_id, username, firstname, lastname, profilepicture} = friend[0];
+            const {user_id, username, firstname, lastname, profilepicture} = friend;
             friendsList.push({user_id, username, firstname, lastname, profilepicture});
         });
         res.status(200).json(friendsList)
@@ -189,14 +194,15 @@ export const _getFollowingsOfUser = async (req, res) =>{
     try {
         const _user = await getUserById(req.params.user_id);
         const user = _user[0];
-        const followings = await Promise.all(
-            user.followings.map(followingId => {
-                return getUserById(followingId)
-            })
-        )
+        // const followings = await Promise.all(
+        //     user.followings.map(followingId => {
+        //         return getUserById(followingId)
+        //     })
+        // )
+        const followings = await getUserByIds(user.followings)
         let followingsList = [];
         followings.map(following => {
-            const {user_id, username, firstname, lastname, profilepicture} = following[0];
+            const {user_id, username, firstname, lastname, profilepicture} = following;
             followingsList.push({user_id, username, firstname, lastname, profilepicture});
         });
         res.status(200).json(followingsList)
