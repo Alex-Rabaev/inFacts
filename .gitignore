@@ -9,6 +9,9 @@ node_modules/
 .yarn/
 jspm_packages/
 bower_components/
+.pnpm-store/
+.corepack/
+*.tsbuildinfo
 
 # ---------------------------------------------
 # Build / output
@@ -75,5 +78,4 @@ coverage/
 _bmad/
 _bmad-output/
 .agents/
-.github/
 docs/
