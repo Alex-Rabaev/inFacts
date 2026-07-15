@@ -9,6 +9,7 @@ export default tseslint.config(
       ".pnpm-store/**",
       ".corepack/**",
       "legacy/**",
+      "**/src/generated/**",
       "**/*.config.*",
       "apps/web/vite-env.d.ts",
     ],
