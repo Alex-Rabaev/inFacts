@@ -21,9 +21,27 @@ A fact-sharing social network — users post claims backed by proof links, and a
 
 ## Getting started
 
+### One command (Docker)
+
+```bash
+docker compose up --build
+```
+
+Brings up PostgreSQL 18, runs migrations + seed, and serves the API on
+`http://localhost:3030` (Swagger at `/api/docs`) and the web app on
+`http://localhost:5173` (override with `WEB_PORT=8080 docker compose up` if taken).
+Postgres is exposed on host port **5433**. Seeded demo users: `admin`, `maya`,
+`daniel`, `priya` (password `infacts-demo`).
+
+### Local development
+
 ```bash
 # pnpm via corepack (no global install needed)
 corepack pnpm@9 install
+
+cp .env.example .env          # fill values as needed
+
+docker compose up -d postgres # database only
 
 pnpm lint      # eslint across the monorepo (no `any` allowed)
 pnpm test      # run every workspace's tests
@@ -33,7 +51,17 @@ pnpm dev:api   # run the API in watch mode
 pnpm dev:web   # run the web app (Vite dev server)
 ```
 
-Copy `.env.example` to `.env` and fill values before running the API.
+### Database (Prisma 7, `@prisma/adapter-pg`)
+
+Schema lives in `apps/api/prisma/schema.prisma`; connection and seed are configured
+in `apps/api/prisma.config.ts` (reads the root `.env`).
+
+```bash
+pnpm --filter @infacts/api run prisma:generate  # regenerate the client (also runs on build/test)
+pnpm --filter @infacts/api run prisma:migrate   # create/apply a migration (dev)
+pnpm --filter @infacts/api run prisma:deploy    # apply committed migrations
+pnpm --filter @infacts/api run prisma:seed      # idempotent demo seed
+```
 
 ## Architecture
 
