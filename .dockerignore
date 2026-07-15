@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+apps/api/src/generated
+.git
+.github
+legacy
+_bmad
+_bmad-output
+.agents
+docs
+.corepack
+.pnpm-store
+.env
+*.md

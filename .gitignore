@@ -16,6 +16,7 @@ bower_components/
 # ---------------------------------------------
 # Build / output
 # ---------------------------------------------
+apps/api/src/generated/
 dist/
 build/
 out/
